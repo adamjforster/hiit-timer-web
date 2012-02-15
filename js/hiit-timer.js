@@ -14,6 +14,8 @@ function run() {
 	
 	count = delay;
 	interval_id = setInterval(tick, 1000);
+	
+	return false; // Prevent the form from being submitted.
 }
 
 function build_schedule() {
