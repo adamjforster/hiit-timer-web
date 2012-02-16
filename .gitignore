@@ -1,1 +1,16 @@
+# Django
+/media/
+
+# Eclipse
 .project
+.pydevproject
+/.settings/
+
+# OS X
+.DS_Store
+
+# Python
+*.py[co]
+
+# Vim
+*.swp
