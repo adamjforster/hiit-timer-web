@@ -8,6 +8,7 @@ var schedule_length = null;
 $(document).ready(function() {
 	$('#run').click(run);
 	$('#stop').click({'now': true}, stop);
+	$('#settings-fields > input[type="text"]').blur(clean_input);
 });
 
 function run() {
@@ -24,11 +25,11 @@ function stop(now) {
 	clearInterval(interval_id);
 	
 	if (now == false) {
-		setTimeout("$('#countdown').html(0)", 1000);
-	} else {
-		$('#countdown').html(0);
+		setTimeout("stop()", 1000);
+		return;
 	}
 	
+	$('#countdown').html(0);
 	toggle_buttons();
 	
 	return false;  // Prevent the form from being submitted.
@@ -60,7 +61,7 @@ function build_schedule() {
 function tick() {
 	$('#countdown').html(count);
 	count--;
-	if (count == 0) {
+	if (count < 1) {
 		schedule_index++;
 		if (schedule_index == schedule_length) {
 			stop(false);
@@ -68,4 +69,16 @@ function tick() {
 			count = schedule[schedule_index];
 		}
 	}
+}
+
+function clean_input() {
+	input = $(this);
+	value = input.val();
+	
+	value = parseInt(value);
+	if (isNaN(value)) {
+		value = 0;
+	}
+	
+	input.val(value);
 }
