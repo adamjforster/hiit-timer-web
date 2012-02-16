@@ -5,14 +5,40 @@
 	input {
 	   text-align: center;
     }
+    
+    #stop {
+	    display: none;
+	}
 }
 
-#stop {
-    display: none;
-}
 
-#countdown {
+
+#countdown-area {
 	text-align: center;
-	font-size: 25em;
-	line-height: 1em;
+	
+	#section-title {
+	    font-size: 2em;
+        line-height: 1em;
+    }
+	
+	#countdown {
+		font-size: 25em;
+		line-height: 1em;
+	}
+}
+
+#countdown-area.warmup {
+    color: @green;
+}
+
+#countdown-area.normal {
+    color: @orange;
+}
+
+#countdown-area.high {
+    color: @red;
+}
+
+#countdown-area.cooldown {
+    color: @blue;
 }

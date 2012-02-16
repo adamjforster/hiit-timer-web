@@ -1,1 +1,1 @@
-#settings-fields input{text-align:center}#stop{display:none}#countdown{text-align:center;font-size:25em;line-height:1em}
+#settings-fields input{text-align:center}#settings-fields #stop{display:none}#countdown-area{text-align:center}#countdown-area #section-title{font-size:2em;line-height:1em}#countdown-area #countdown{font-size:25em;line-height:1em}#countdown-area.warmup{color:#46a546}#countdown-area.normal{color:#f89406}#countdown-area.high{color:#9d261d}#countdown-area.cooldown{color:#049cdb}
