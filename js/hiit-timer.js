@@ -7,15 +7,36 @@ var schedule_length = null;
 
 $(document).ready(function() {
 	$('#run').click(run);
+	$('#stop').click({'now': true}, stop);
 });
 
 function run() {
+	toggle_buttons();
 	build_schedule();
 	
 	count = delay;
 	interval_id = setInterval(tick, 1000);
 	
 	return false; // Prevent the form from being submitted.
+}
+
+function stop(now) {
+	clearInterval(interval_id);
+	
+	if (now == false) {
+		setTimeout("$('#countdown').html(0)", 1000);
+	} else {
+		$('#countdown').html(0);
+	}
+	
+	toggle_buttons();
+	
+	return false;  // Prevent the form from being submitted.
+}
+
+function toggle_buttons() {
+	$('#run').toggle();
+	$('#stop').toggle();
 }
 
 function build_schedule() {
@@ -42,8 +63,7 @@ function tick() {
 	if (count == 0) {
 		schedule_index++;
 		if (schedule_index == schedule_length) {
-			clearInterval(interval_id);
-			setTimeout("$('#countdown').html(0)", 1000);
+			stop(false);
 		} else {
 			count = schedule[schedule_index];
 		}
