@@ -9,7 +9,7 @@ $(document).ready(function () {
 	$('#stop').click({'now': true}, stop);
 	
 	$('#settings-fields > input[type="text"]').blur(clean_input);
-	$('#settings-fields').tooltip({selector: "a[rel=tooltip]"});
+	$('#settings-fields').tooltip({selector: "a[class=help-tooltip]"});
 });
 
 function start() {
