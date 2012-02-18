@@ -4,14 +4,12 @@ var interval_id = null;
 var schedule = null;
 var schedule_index = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
 	$('#start').click(start);
 	$('#stop').click({'now': true}, stop);
-	$('#settings-fields > input[type="text"]').blur(clean_input);
 	
-	$('#settings-fields').tooltip({
-      selector: "a[rel=tooltip]"
-    })
+	$('#settings-fields > input[type="text"]').blur(clean_input);
+	$('#settings-fields').tooltip({selector: "a[rel=tooltip]"});
 });
 
 function start() {
@@ -24,7 +22,7 @@ function start() {
 	interval_id = setInterval(tick, 1000);
 }
 
-function stop(now) {
+function stop() {
 	clearInterval(interval_id);
 	
 	$('#countdown-area').removeClass();
@@ -48,21 +46,31 @@ function build_schedule() {
 	
 	schedule = [];
 	if (delay > 0) {
-	    schedule.push({'title': 'Get ready', 'class': 'delay', 'seconds': delay});
+	    schedule.push(
+		    {'title': 'Get ready', 'class': 'delay', 'seconds': delay}
+		);
 	}
 	if (warm_up > 0) {
-		schedule.push({'title': 'Warm up', 'class': 'warmup', 'seconds': warm_up});
+		schedule.push(
+		    {'title': 'Warm up', 'class': 'warmup', 'seconds': warm_up}
+		);
 	}
 	for (reps = reps; reps > 0; reps--) {
 		if (high > 0) {
-			schedule.push({'title': 'High intensity', 'class': 'high', 'seconds': high});
+			schedule.push(
+			    {'title': 'High intensity', 'class': 'high', 'seconds': high}
+			);
 		}
 		if (normal > 0) {
-			schedule.push({'title': 'Normal intensity', 'class': 'normal', 'seconds': normal});
+			schedule.push(
+		        {'title': 'Normal intensity', 'class': 'normal', 'seconds': normal}
+		    );
 		}
 	}
 	if (cool_down > 0) {
-		schedule.push({'title': 'Cool down', 'class': 'cooldown', 'seconds': cool_down});
+		schedule.push(
+		    {'title': 'Cool down', 'class': 'cooldown', 'seconds': cool_down}
+		);
 	}
 	
 	schedule_index = 0;
