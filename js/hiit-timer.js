@@ -37,12 +37,12 @@ function toggle_buttons() {
 }
 
 function build_schedule() {
-	delay = $('#delay').val();
-	warm_up = $('#warm_up').val();
-	high = $('#high').val();
-	normal = $('#normal').val();
-	reps = $('#reps').val();
-	cool_down = $('#cool_down').val();
+	delay = $('#delay_field').val();
+	warm_up = $('#warm_up_field').val();
+	high = $('#high_field').val();
+	normal = $('#normal_field').val();
+	reps = $('#reps_field').val();
+	cool_down = $('#cool_down_field').val();
 	
 	schedule = [];
 	if (delay > 0) {
