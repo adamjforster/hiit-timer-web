@@ -47,29 +47,29 @@ function build_schedule() {
 	schedule = [];
 	if (delay > 0) {
 	    schedule.push(
-		    {'title': 'Get ready', 'class': 'delay', 'seconds': delay}
+		    {'title': 'Get ready', 'css_class': 'delay', 'seconds': delay}
 		);
 	}
 	if (warm_up > 0) {
 		schedule.push(
-		    {'title': 'Warm up', 'class': 'warmup', 'seconds': warm_up}
+		    {'title': 'Warm up', 'css_class': 'warmup', 'seconds': warm_up}
 		);
 	}
 	for (reps = reps; reps > 0; reps--) {
 		if (high > 0) {
 			schedule.push(
-			    {'title': 'High intensity', 'class': 'high', 'seconds': high}
+			    {'title': 'High intensity', 'css_class': 'high', 'seconds': high}
 			);
 		}
 		if (normal > 0) {
 			schedule.push(
-		        {'title': 'Normal intensity', 'class': 'normal', 'seconds': normal}
+		        {'title': 'Normal intensity', 'css_class': 'normal', 'seconds': normal}
 		    );
 		}
 	}
 	if (cool_down > 0) {
 		schedule.push(
-		    {'title': 'Cool down', 'class': 'cooldown', 'seconds': cool_down}
+		    {'title': 'Cool down', 'css_class': 'cooldown', 'seconds': cool_down}
 		);
 	}
 	
@@ -85,7 +85,7 @@ function tick() {
 			stop();
 		} else {
 			count = schedule[schedule_index].seconds;
-			$('#countdown-area').addClass(schedule[schedule_index].class);
+			$('#countdown-area').addClass(schedule[schedule_index].css_class);
 			$('#section-title').html(schedule[schedule_index].title);
 		}
 	}
