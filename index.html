@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>HIIT timer</title>
+    <title>High Intensity Interval Training Timer</title>
     
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
@@ -12,35 +12,55 @@
 </head>
 <body>
     <div class="container">
-        <div class="navbar">
-		    <div class="navbar-inner">
-		        <div class="container">
-		            <a class="brand" href=".">HIIT Timer</a>
-		        </div>
-	        </div>
-        </div>
-        <form class="form-inline well">
-            <fieldset id="settings-fields">
-    		    <label for="delay">Delay:</label>
-    		    <input id="delay" type="text" value="10" class="span1" />
-    		    <label for="warm_up">Warm up:</label>
-    		    <input id="warm_up" type="text" value="60" class="span1" />
-    		    <label for="high">High:</label>
-    		    <input id="high" type="text" value="30" class="span1" />
-    		    <label for="normal">Normal:</label>
-    		    <input id="normal" type="text" value="60" class="span1" />
-    		    <label for="reps">Reps:</label>
-    		    <input id="reps" type="text" value="3" class="span1" />
-    		    <label for="cool_down">Cool down:</label>
-    		    <input id="cool_down" type="text" value="60" class="span1" />
-    		    <input id="start" type="submit" value="Workout!" class="btn-success" />
-                <input id="stop" type="submit" value="Stop" class="btn-danger" />
-		    </fieldset>
-	    </form>
+        <header class="page-header">
+            <h1>High Intensity Interval Training Timer</h1>
+        </header>
+        <div id="settings-fields" class="form-inline well">
+   		    <label for="delay">Delay:</label>
+   		    <input id="delay" type="text" value="10" class="span1" />
+   		    <label for="warm_up">Warm up:</label>
+   		    <input id="warm_up" type="text" value="60" class="span1" />
+   		    <label for="high">High:</label>
+   		    <input id="high" type="text" value="30" class="span1" />
+   		    <label for="normal">Normal:</label>
+   		    <input id="normal" type="text" value="60" class="span1" />
+   		    <label for="reps">Reps:</label>
+   		    <input id="reps" type="text" value="3" class="span1" />
+   		    <label for="cool_down">Cool down:</label>
+   		    <input id="cool_down" type="text" value="60" class="span1" />
+   		    <a id="start" class="btn btn-success">
+   		        <i class="icon-play icon-white"></i> Workout!
+   		    </a>
+            <a id="stop" class="btn btn-danger">
+                <i class="icon-stop icon-white"></i> Stop
+            </a>
+	    </div>
 	    <div id="countdown-area">
 		    <h2 id="section-title">Get ready</h2>
 		    <p id="countdown">0</p>
 	    </div>
+	    <footer class="row">
+	        <div id="follow" class="span4">
+                For updates
+	            <a href="https://twitter.com/hiittimer" class="twitter-follow-button" data-show-count="false">Follow @hiittimer</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+	        <div id="license" class="span4">
+	            <p>
+                    Source available on
+                    <a href="https://github.com/adamjforster/hiit-timer-web">
+                        GitHub</a>
+                </p>
+	            <p>
+	                Code licensed under the
+	                <a href="https://github.com/adamjforster/hiit-timer-web/blob/master/LICENSE">
+	                    New BSD License</a>
+	            </p>
+	        </div>
+	        <div id="built-by" class="span4">
+	            <p>Built by <a href="https://twitter.com/adamjforster">@adamjforster</a></p>
+	        </div>
+	    </footer>
     </div>
 </body>
 </html>

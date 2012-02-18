@@ -18,8 +18,6 @@ function start() {
 	$('#section-title').html(schedule[0].title);
 	$('#countdown').html(count);
 	interval_id = setInterval(tick, 1000);
-	
-	return false; // Prevent the form from being submitted.
 }
 
 function stop(now) {
@@ -29,8 +27,6 @@ function stop(now) {
 	$('#section-title').html('Done');
 	$('#countdown').html(0);
 	toggle_buttons();
-	
-	return false;  // Prevent the form from being submitted.
 }
 
 function toggle_buttons() {
