@@ -8,6 +8,7 @@
     <link href="css/default.css" rel="stylesheet">
     
     <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
     <script src="js/hiit-timer.js"></script>
     
     <script type="text/javascript">
@@ -25,20 +26,56 @@
 <body>
     <div class="container">
         <header class="page-header">
-            <h1>High Intensity Interval Training Timer</h1>
+            <h1>High-intensity interval training timer</h1>
         </header>
         <div id="settings-fields" class="form-inline well">
-   		    <label for="delay">Delay:</label>
+   		    <label for="delay">
+                Delay:
+                <a href="#" rel="tooltip"
+                    title="Delay before starting routine, in seconds.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
    		    <input id="delay" type="text" value="10" class="span1" />
-   		    <label for="warm_up">Warm up:</label>
+   		    <label for="warm_up">
+                Warm up:
+                <a href="#" rel="tooltip"
+                    title="Length of warm up, in seconds.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
    		    <input id="warm_up" type="text" value="60" class="span1" />
-   		    <label for="high">High:</label>
-   		    <input id="high" type="text" value="30" class="span1" />
-   		    <label for="normal">Normal:</label>
-   		    <input id="normal" type="text" value="60" class="span1" />
-   		    <label for="reps">Reps:</label>
-   		    <input id="reps" type="text" value="3" class="span1" />
-   		    <label for="cool_down">Cool down:</label>
+   		    <label for="high">
+                High:
+                <a href="#" rel="tooltip"
+                    title="Length of each high-intensity rep, in seconds.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
+   		    <input id="high" type="text" value="60" class="span1" />
+   		    <label for="normal">
+                Normal:
+                <a href="#" rel="tooltip"
+                    title="Length of each normal-intensity rep, in seconds.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
+   		    <input id="normal" type="text" value="90" class="span1" />
+   		    <label for="reps">
+                Reps:
+                <a href="#" rel="tooltip"
+                    title="Number of times to repeat the high-intensity / normal-intensity cycle.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
+   		    <input id="reps" type="text" value="6" class="span1" />
+   		    <label for="cool_down">
+                Cool down:
+                <a href="#" rel="tooltip"
+                    title="Length of cool down, in seconds.">
+                    <i class="icon-question-sign"></i>
+                </a>
+            </label>
    		    <input id="cool_down" type="text" value="60" class="span1" />
    		    <a id="start" class="btn btn-success">
    		        <i class="icon-play icon-white"></i> Workout!

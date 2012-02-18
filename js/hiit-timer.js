@@ -8,6 +8,10 @@ $(document).ready(function() {
 	$('#start').click(start);
 	$('#stop').click({'now': true}, stop);
 	$('#settings-fields > input[type="text"]').blur(clean_input);
+	
+	$('#settings-fields').tooltip({
+      selector: "a[rel=tooltip]"
+    })
 });
 
 function start() {
