@@ -4,9 +4,13 @@ var interval_id = null;
 var schedule = null;
 var schedule_index = null;
 
+var beep = new buzz.sound('/audio/beep', {formats: ['ogg', 'mp3']});
+var high_beeps = new buzz.sound('/audio/high', {formats: ['ogg', 'mp3']});
+var normal_beeps = new buzz.sound('/audio/normal', {formats: ['ogg', 'mp3']});
+
 $(document).ready(function () {
 	$('#start').click(start);
-	$('#stop').click({'now': true}, stop);
+	$('#stop').click(stop);
 	
 	$('#settings-fields > input[type="text"]').blur(clean_input);
 	$('#settings-fields').tooltip({selector: "a[class=help-tooltip]"});
@@ -37,39 +41,64 @@ function toggle_buttons() {
 }
 
 function build_schedule() {
-	delay = $('#delay_field').val();
-	warm_up = $('#warm_up_field').val();
-	high = $('#high_field').val();
-	normal = $('#normal_field').val();
-	reps = $('#reps_field').val();
-	cool_down = $('#cool_down_field').val();
+	var delay = $('#delay_field').val();
+	var warm_up = $('#warm_up_field').val();
+	var high = $('#high_field').val();
+	var normal = $('#normal_field').val();
+	var reps = $('#reps_field').val();
+	var cool_down = $('#cool_down_field').val();
 	
 	schedule = [];
 	if (delay > 0) {
 	    schedule.push(
-		    {'title': 'Get ready', 'css_class': 'delay', 'seconds': delay}
+		    {
+		    	'title': 'Get ready',
+		    	'css_class': 'delay',
+		    	'seconds': delay,
+		    	'start_sound': null
+		    }
 		);
 	}
 	if (warm_up > 0) {
 		schedule.push(
-		    {'title': 'Warm up', 'css_class': 'warmup', 'seconds': warm_up}
+		    {
+		    	'title': 'Warm up',
+		    	'css_class': 'warmup',
+		    	'seconds': warm_up,
+		    	'start_sound': null
+		    }
 		);
 	}
-	for (reps = reps; reps > 0; reps--) {
+	for (var reps = reps; reps > 0; reps--) {
 		if (high > 0) {
 			schedule.push(
-			    {'title': 'High intensity', 'css_class': 'high', 'seconds': high}
+			    {
+			    	'title': 'High intensity',
+			    	'css_class': 'high',
+			    	'seconds': high,
+			    	'start_sound': high_beeps
+			    }
 			);
 		}
 		if (normal > 0) {
 			schedule.push(
-		        {'title': 'Normal intensity', 'css_class': 'normal', 'seconds': normal}
+		        {
+		        	'title': 'Normal intensity',
+		        	'css_class': 'normal',
+		        	'seconds': normal,
+		        	'start_sound': normal_beeps
+		        }
 		    );
 		}
 	}
 	if (cool_down > 0) {
 		schedule.push(
-		    {'title': 'Cool down', 'css_class': 'cooldown', 'seconds': cool_down}
+		    {
+		    	'title': 'Cool down',
+		    	'css_class': 'cooldown',
+		    	'seconds': cool_down,
+		    	'start_sound': null
+		    }
 		);
 	}
 	
@@ -77,7 +106,9 @@ function build_schedule() {
 }
 
 function tick() {
-	if (--count == 0) {
+	count--;
+	
+	if (count == 0) {
 		schedule_index++;
 		$('#countdown-area').removeClass();
 		
@@ -87,14 +118,22 @@ function tick() {
 			count = schedule[schedule_index].seconds;
 			$('#countdown-area').addClass(schedule[schedule_index].css_class);
 			$('#section-title').html(schedule[schedule_index].title);
+			
+			if (schedule[schedule_index].start_sound) {
+				schedule[schedule_index].start_sound.play();
+				console.log(schedule[schedule_index].start_sound);
+			}
 		}
+	} else if (count < 11) {
+		beep.play();
+		console.log(beep);
 	}
 	$('#countdown').html(count);
 }
 
 function clean_input() {
-	input = $(this);
-	value = input.val();
+	var input = $(this);
+	var value = input.val();
 	
 	value = parseInt(value);
 	if (isNaN(value)) {
