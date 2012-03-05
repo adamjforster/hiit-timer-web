@@ -17,7 +17,9 @@
     
     <script src="/js/lib/jquery-1.7.1.min.js"></script>
     <script src="/js/lib//bootstrap/dropdown.js"></script>
+    <script src="/js/lib//bootstrap/modal.js"></script>
     <script src="/js/lib//bootstrap/tooltip.js"></script>
+    <script src="/js/lib//bootstrap/transition.js"></script>
     <script src="/js/hiit-timer.js"></script>
     
     <!--[if lt IE 9]>
@@ -37,6 +39,27 @@
     </script>
 </head>
 <body>
+    <div class="modal fade" id="save-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>Save workout</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="workout-name">Workout name</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="workout-name">
+                        <p class="help-block">Enter a name for this workout.</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" id="workout-save-btn">Save workout</a>
+            <a data-dismiss="modal" class="btn">Close</a>
+        </div>
+    </div>
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -59,8 +82,10 @@
                                 </a>
                             </li>
                             <li class="divider"></li>
-                            <li><h3>Load workout:</h3></li>
-                            <li><a>workout</a></li>
+                            <li>Load a workout:</li>
+                            <li>
+                                <ul id="workout-list"></ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -73,7 +98,7 @@
         </header>
         <div id="settings-fields" class="form-inline well">
    		    <label for="delay_field">
-                Delay:
+                Delay
                 <a href="#" class="help-tooltip"
                     title="Delay before starting routine, in seconds.">
                     <i class="icon-question-sign"></i>
@@ -81,7 +106,7 @@
             </label>
    		    <input id="delay_field" type="text" value="10" class="span1" />
    		    <label for="warm_up_field">
-                Warm up:
+                Warm up
                 <a href="#" class="help-tooltip"
                     title="Length of warm up, in seconds.">
                     <i class="icon-question-sign"></i>
@@ -89,7 +114,7 @@
             </label>
    		    <input id="warm_up_field" type="text" value="120" class="span1" />
    		    <label for="high_field">
-                High:
+                High
                 <a href="#" class="help-tooltip"
                     title="Length of each high-intensity rep, in seconds.">
                     <i class="icon-question-sign"></i>
@@ -97,7 +122,7 @@
             </label>
    		    <input id="high_field" type="text" value="60" class="span1" />
    		    <label for="normal_field">
-                Normal:
+                Normal
                 <a href="#" class="help-tooltip"
                     title="Length of each normal-intensity rep, in seconds.">
                     <i class="icon-question-sign"></i>
@@ -105,7 +130,7 @@
             </label>
    		    <input id="normal_field" type="text" value="90" class="span1" />
    		    <label for="reps_field">
-                Reps:
+                Reps
                 <a href="#" class="help-tooltip"
                     title="Number of times to repeat the high-intensity / normal-intensity cycle.">
                     <i class="icon-question-sign"></i>
@@ -113,7 +138,7 @@
             </label>
    		    <input id="reps_field" type="text" value="6" class="span1" />
    		    <label for="cool_down_field">
-                Cool down:
+                Cool down
                 <a href="#" class="help-tooltip"
                     title="Length of cool down, in seconds.">
                     <i class="icon-question-sign"></i>

@@ -7,13 +7,16 @@ var schedule = null;
 var schedule_index = null;
 
 $(document).ready(function () {
+	$('#save-modal').modal({'show': false});
+	$('#workout-save-btn').click(save_workout);
+	update_workout_list();
+	
 	$('#start').click(start);
 	$('#stop').click(stop);
+	$('#save-workout').click(display_save_modal);
 	
 	$('#settings-fields > input[type="text"]').blur(clean_input);
 	$('#settings-fields').tooltip({selector: "a[class=help-tooltip]"});
-	
-	$('#save-workout').click(save_workout);
 });
 
 function start() {
@@ -40,40 +43,46 @@ function toggle_buttons() {
 	$('#stop').toggle();
 }
 
+function get_form_values() {
+	return {
+		'delay': $('#delay_field').val(),
+		'warm_up': $('#warm_up_field').val(),
+		'high': $('#high_field').val(),
+		'normal': $('#normal_field').val(),
+		'reps': $('#reps_field').val(),
+		'cool_down': $('#cool_down_field').val()
+	};
+}
+
 function build_schedule() {
-	var delay = $('#delay_field').val();
-	var warm_up = $('#warm_up_field').val();
-	var high = $('#high_field').val();
-	var normal = $('#normal_field').val();
-	var reps = $('#reps_field').val();
-	var cool_down = $('#cool_down_field').val();
+	var settings = get_form_values();
 	
 	schedule = [];
-	if (delay > 0) {
+	if (settings.delay > 0) {
 		schedule.push(
-			{'title': 'Get ready', 'css_class': 'delay', 'seconds': delay}
+			{'title': 'Get ready', 'css_class': 'delay', 'seconds': settings.delay}
 		);
 	}
-	if (warm_up > 0) {
+	if (settings.warm_up > 0) {
 		schedule.push(
-            {'title': 'Warm up', 'css_class': 'warmup', 'seconds': warm_up}
+            {'title': 'Warm up', 'css_class': 'warmup', 'seconds': settings.warm_up}
 		);
 	}
-	for (var rep = reps; rep > 0; rep--) {
-		if (high > 0) {
+	for (var rep = settings.reps; rep > 0; rep--) {
+		if (settings.high > 0) {
 			schedule.push(
-                {'title': 'High intensity', 'css_class': 'high', 'seconds': high}
+                {'title': 'High intensity', 'css_class': 'high', 'seconds': settings.high}
 			);
 		}
-		if (normal > 0) {
+		if (settings.normal > 0) {
 			schedule.push(
-                {'title': 'Normal intensity', 'css_class': 'normal', 'seconds': normal}
+                {'title': 'Normal intensity', 'css_class': 'normal', 'seconds': settings.normal}
             );
 		}
 	}
-	if (cool_down > 0) {
+	if (settings.cool_down > 0) {
 		schedule.push(
-            {'title': 'Cool down', 'css_class': 'cooldown', 'seconds': cool_down}
+            {'title': 'Cool down', 'css_class': 'cooldown', 'seconds': settings.cool_down}
 		);
 	}
 	
@@ -108,7 +117,40 @@ function clean_input(event) {
 	field.val(value);
 }
 
-function save_workout() {
-	console.log('save');
+function display_save_modal() {
 	$('.dropdown-toggle').dropdown();
+	
+	$('#workout-name').val('');
+	$('#save-modal').modal('show');
+}
+
+function save_workout() {
+	var settings = get_form_values();
+	var name = $('#workout-name').val();
+	var workouts = localStorage.getItem('workouts');
+	
+	if (workouts) {
+		workouts = JSON.parse(workouts);
+	} else {
+		workouts = {};
+	}
+	
+	workouts[name] = settings;
+	localStorage.setItem('workouts', JSON.stringify(workouts));
+	
+	$('#save-modal').modal('hide');
+	update_workout_list();
+}
+
+function update_workout_list() {
+	var html = '';
+	var workouts = JSON.parse(localStorage.getItem('workouts'));
+	
+	if (workouts) {
+		for (var workout in workouts) {
+			html += '<li><a>' + workout + '</a></li>';
+		}
+	}
+	
+	$('#workout-list').html(html);
 }
