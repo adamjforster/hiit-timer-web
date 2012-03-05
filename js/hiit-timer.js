@@ -6,10 +6,12 @@ var schedule_index = null;
 
 $(document).ready(function () {
 	$('#start').click(start);
-	$('#stop').click({'now': true}, stop);
+	$('#stop').click(stop);
 	
 	$('#settings-fields > input[type="text"]').blur(clean_input);
 	$('#settings-fields').tooltip({selector: "a[class=help-tooltip]"});
+	
+	$('#save-workout').click(save_workout);
 });
 
 function start() {
@@ -102,4 +104,9 @@ function clean_input() {
 	}
 	
 	input.val(value);
+}
+
+function save_workout() {
+	console.log('save');
+	$('.dropdown-toggle').dropdown()
 }

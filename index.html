@@ -15,8 +15,9 @@
     <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png">
     
-    <script src="/js/jquery-1.7.1.min.js"></script>
-    <script src="/js/bootstrap-tooltip.js"></script>
+    <script src="/js/lib/jquery-1.7.1.min.js"></script>
+    <script src="/js/lib//bootstrap/dropdown.js"></script>
+    <script src="/js/lib//bootstrap/tooltip.js"></script>
     <script src="/js/hiit-timer.js"></script>
     
     <!--[if lt IE 9]>
@@ -24,24 +25,54 @@
     <![endif]-->
     
     <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-542659-8']);
-        _gaq.push(['_trackPageview']);
-        
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-542659-8']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
 </head>
 <body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li id="workout-menu" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Workouts
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a id="save-workout">
+                                    <i class="icon-plus"></i>
+                                    Save workout
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><h3>Load workout:</h3></li>
+                            <li><a>workout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <header class="page-header">
             <h1>High-intensity interval training timer</h1>
         </header>
         <div id="settings-fields" class="form-inline well">
-   		    <label for="delay">
+   		    <label for="delay_field">
                 Delay:
                 <a href="#" class="help-tooltip"
                     title="Delay before starting routine, in seconds.">
@@ -49,7 +80,7 @@
                 </a>
             </label>
    		    <input id="delay_field" type="text" value="10" class="span1" />
-   		    <label for="warm_up">
+   		    <label for="warm_up_field">
                 Warm up:
                 <a href="#" class="help-tooltip"
                     title="Length of warm up, in seconds.">
@@ -57,7 +88,7 @@
                 </a>
             </label>
    		    <input id="warm_up_field" type="text" value="120" class="span1" />
-   		    <label for="high">
+   		    <label for="high_field">
                 High:
                 <a href="#" class="help-tooltip"
                     title="Length of each high-intensity rep, in seconds.">
@@ -65,7 +96,7 @@
                 </a>
             </label>
    		    <input id="high_field" type="text" value="60" class="span1" />
-   		    <label for="normal">
+   		    <label for="normal_field">
                 Normal:
                 <a href="#" class="help-tooltip"
                     title="Length of each normal-intensity rep, in seconds.">
@@ -73,7 +104,7 @@
                 </a>
             </label>
    		    <input id="normal_field" type="text" value="90" class="span1" />
-   		    <label for="reps">
+   		    <label for="reps_field">
                 Reps:
                 <a href="#" class="help-tooltip"
                     title="Number of times to repeat the high-intensity / normal-intensity cycle.">
@@ -81,7 +112,7 @@
                 </a>
             </label>
    		    <input id="reps_field" type="text" value="6" class="span1" />
-   		    <label for="cool_down">
+   		    <label for="cool_down_field">
                 Cool down:
                 <a href="#" class="help-tooltip"
                     title="Length of cool down, in seconds.">
