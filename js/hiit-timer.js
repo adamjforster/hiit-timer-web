@@ -1,3 +1,5 @@
+'use strict';
+
 var count = 0;
 var interval_id = null;
 
@@ -50,55 +52,55 @@ function build_schedule() {
 	
 	schedule = [];
 	if (delay > 0) {
-	    schedule.push(
-		    {
-		    	'title': 'Get ready',
-		    	'css_class': 'delay',
-		    	'seconds': delay,
-		    	'start_sound': null
-		    }
+		schedule.push(
+			{
+				'title': 'Get ready',
+				'css_class': 'delay',
+				'seconds': delay,
+				'start_sound': null
+			}
 		);
 	}
 	if (warm_up > 0) {
 		schedule.push(
-		    {
-		    	'title': 'Warm up',
-		    	'css_class': 'warmup',
-		    	'seconds': warm_up,
-		    	'start_sound': null
-		    }
+			{
+				'title': 'Warm up',
+				'css_class': 'warmup',
+				'seconds': warm_up,
+				'start_sound': null
+			}
 		);
 	}
-	for (var reps = reps; reps > 0; reps--) {
+	for (var rep = reps; rep > 0; rep--) {
 		if (high > 0) {
 			schedule.push(
-			    {
-			    	'title': 'High intensity',
-			    	'css_class': 'high',
-			    	'seconds': high,
-			    	'start_sound': high_beeps
-			    }
+				{
+					'title': 'High intensity',
+					'css_class': 'high',
+					'seconds': high,
+					'start_sound': high_beeps
+				}
 			);
 		}
 		if (normal > 0) {
 			schedule.push(
-		        {
-		        	'title': 'Normal intensity',
-		        	'css_class': 'normal',
-		        	'seconds': normal,
-		        	'start_sound': normal_beeps
-		        }
-		    );
+				{
+					'title': 'Normal intensity',
+					'css_class': 'normal',
+					'seconds': normal,
+					'start_sound': normal_beeps
+				}
+			);
 		}
 	}
 	if (cool_down > 0) {
 		schedule.push(
-		    {
-		    	'title': 'Cool down',
-		    	'css_class': 'cooldown',
-		    	'seconds': cool_down,
-		    	'start_sound': null
-		    }
+			{
+				'title': 'Cool down',
+				'css_class': 'cooldown',
+				'seconds': cool_down,
+				'start_sound': null
+			}
 		);
 	}
 	
@@ -108,11 +110,11 @@ function build_schedule() {
 function tick() {
 	count--;
 	
-	if (count == 0) {
+	if (count === 0) {
 		schedule_index++;
 		$('#countdown-area').removeClass();
 		
-		if (schedule_index == schedule.length) {
+		if (schedule_index === schedule.length) {
 			stop();
 		} else {
 			count = schedule[schedule_index].seconds;
@@ -129,14 +131,14 @@ function tick() {
 	$('#countdown').html(count);
 }
 
-function clean_input() {
-	var input = $(this);
-	var value = input.val();
+function clean_input(event) {
+	var field = $(event.currentTarget);
+	var value = field.val();
 	
-	value = parseInt(value);
+	value = parseInt(value, 10);
 	if (isNaN(value)) {
 		value = 0;
 	}
 	
-	input.val(value);
+	field.val(value);
 }
