@@ -121,12 +121,10 @@ function tick() {
 			
 			if (schedule[schedule_index].start_sound) {
 				schedule[schedule_index].start_sound.play();
-				console.log(schedule[schedule_index].start_sound);
 			}
 		}
 	} else if (count < 11) {
 		beep.play();
-		console.log(beep);
 	}
 	$('#countdown').html(count);
 }
