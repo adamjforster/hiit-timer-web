@@ -110,5 +110,5 @@ function clean_input(event) {
 
 function save_workout() {
 	console.log('save');
-	$('.dropdown-toggle').dropdown()
+	$('.dropdown-toggle').dropdown();
 }
