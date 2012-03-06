@@ -124,6 +124,19 @@ function display_save_modal() {
 	$('#save-modal').modal('show');
 }
 
+function slugify(value) {
+	/**
+	 * Convert to lowercase, remove non-alphanumeric characters and replace
+	 * whitespace with hyphens.
+	 * 
+	 * Inspired by Django's slugify function.
+	 */
+	
+	value = value.toLowerCase().trim();
+	value = value.replace(/[^\w\s\-]/g, '');
+	return value.replace(/[\s\-]+/g, '-');
+}
+
 function save_workout() {
 	var settings = get_form_values();
 	var name = $('#workout-name').val();
@@ -135,7 +148,8 @@ function save_workout() {
 		workouts = {};
 	}
 	
-	workouts[name] = settings;
+	settings.name = name;
+	workouts[slugify(name)] = settings;
 	localStorage.setItem('workouts', JSON.stringify(workouts));
 	
 	$('#save-modal').modal('hide');
@@ -147,8 +161,9 @@ function update_workout_list() {
 	var workouts = JSON.parse(localStorage.getItem('workouts'));
 	
 	if (workouts) {
-		for (var workout in workouts) {
-			html += '<li><a>' + workout + '</a></li>';
+		for (var key in workouts) {
+			html += '<li><a class="saved-workout" id="workout_' + key + '">' +
+				workouts[key].name + '</a></li>';
 		}
 	}
 	
